@@ -36,12 +36,10 @@ stringToInt()
 
 //--------------------------Task 3--------------------------
 //Print sequence of letters recursively
-//ABC
 //AB
 //A
 //A
 //AB
-//ABC
 def typeLettersRecursive(number: Int): Unit={
     
   if (number>1 && number<27){
