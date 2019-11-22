@@ -1,26 +1,16 @@
 //--------------------------Task 1--------------------------
 // Shopping basket
 import scala.io.StdIn.readLine
-def shopping():Array[String]={
-  var checkout:String = ""
-  var count = 0
-  var basket:Array[String] = new Array[String](5)
-  while(checkout != "YES"){
-    try{
-      basket(count) = readLine("Enter product name\n")
-      checkout = readLine("If you wish to check out, type YES \nIf you want to continue, press ENTER")
-      count += 1
+def shopping(products:String):Unit={
+    val basket:Array[String] = products.split(" ")		// this function takes string and splits it into an array
+    println(basket.mkString(", "))
+    println(basket.length)
+    if (basket.length>5){					// if the size of an array is larger than 5, we throw exception
+        throw new Exception("Your basket contains more than 5 items!!!")
     }
-    catch{
-      case _:Throwable => println("ERROR!!! Your items exceeded the limit of 5!");
-			return basket
-    }
-
-  }
-  return basket  
 }
 
-shopping()
+shopping("Cake juice cigarettes bread")
 
 //------------------------Task 1 END-------------------------
 
@@ -30,14 +20,13 @@ shopping()
 import scala.io.StdIn._
 def stringToInt(): Unit ={
   var text = readLine()
-  try{
+  try{				//if we can make conversion, we convert the input to integer			
     var number = text.toInt
     println(number)
   }
-  catch{
+  catch{			//if conversion is impossible, we throw an exception
     case _: Throwable => println("ERROR!!! Conversion from character to integer is impossible!")
   }
-  
 }
 
 stringToInt()
@@ -54,32 +43,27 @@ stringToInt()
 //AB
 //ABC
 def typeLettersRecursive(number: Int): Unit={
-  
+    
   if (number>1 && number<27){
-    for (i <- 0 to number){
+    for (i <- 0 until number)        // if the number is in acceptable range, print the sequence
       print((65+i).toChar)
-    }
     println()
-    
-    typeLettersRecursive(number-1)
-    
-    for (i <- 0 to number){
+    typeLettersRecursive(number-1)   // calls the same function for number-1
+    for (i <- 0 until number)        // printing the sequence once more, after exiting recursion
       print((65+i).toChar)
-    }
     println()
   }
-    else if (number == 1){
-    println(65.toChar)
-    println(65.toChar)
+	
+    else if (number == 1){           // 1 is the base case, where we type "A" twice and exit
+    println("A\nA")
   }
-    else{
+    else{                            // if we have number which is not in acceptable range, we output the error message
     println("Invalid input. Should be integer between 1 and 26")
   
   }
 }
 
-var num:Int =8
-typeLettersRecursive(num)
+typeLettersRecursive(2)
 
 //------------------------Task 3 END-------------------------
 
@@ -103,14 +87,13 @@ def averageNoOutlyers(arr:Array[Int]):Double={
   var sum:Double = 0.0
   
   for (i <- arr){
-    if (min > i)
+    if (min > i)			// Find min
       min = i
-    if (max < i)
+    if (max < i)			// Find max
       max = i
     sum += i
   }
-  
-  return (sum - min - max)/(arr.length-2)
+  return (sum - min - max)/(arr.length-2)   // calculate average without min and max
 }
 
 var arrayTest:Array[Int] = Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100, -999)
@@ -121,17 +104,17 @@ println(averageNoOutlyers(arrayTest))
 
 //--------------------------Task 6--------------------------
 //Shift the sequence of numbers from 1 to n to the left and append the ones that pop out to the right
-def leftShift(numbers:Int, shifts:Int):Unit={
-  println("Input numbers       : from 1 to " + numbers)
+def leftShift(range:Int, shifts:Int):Unit={
+  println("Input numbers       : from 1 to " + range)
   println("Number of shifts : " + shifts)
-  for(i <- 1 to numbers){
-    print(i.toString + " ")
+  for(i <- 1 to range){			// This loop outputs the original sequence before shifting
+    print(i + " ")
   }
   println("")
-  for(i <- shifts+1 to numbers)
-    print(i.toString + " ")
-  for(i <- 1 to shifts)
-    print(i.toString + " ")
+  for(i <- shifts+1 to range)		// this loop outputs the sequense from 'shifts + 1' to the end
+    print(i + " ")
+  for(i <- 1 to shifts)			// this loop outputh the sequence from 1 to 'shifts'
+    print(i + " ")
 }
 
 
@@ -146,8 +129,8 @@ import scala.collection.immutable.StringOps
 
 def findA(str:String, n:Int):Integer={
   val len:Int = str.length
-  val substr:String = str.slice(0, (n%len))
-  var result = (n/len)*(str.count(_=='a')) + substr.count(_=='a')
+  val substr:String = str.slice(0, (n%len))      // this substring is the incomplete part of string that comprises the last part of 'n'
+  var result = (n/len)*(str.count(_=='a')) + substr.count(_=='a') //complete strings that fit into 'n' plus substring
   return result
 }
 
