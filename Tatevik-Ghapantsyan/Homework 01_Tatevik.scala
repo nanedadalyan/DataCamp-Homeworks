@@ -103,12 +103,6 @@ println(averageNoOutlyers(arrayTest))
 //--------------------------Task 6--------------------------
 //Shift the sequence of numbers from 1 to n to the left and append the ones that pop out to the right
 def leftShift(range:Int, shifts:Int):Unit={
-  println("Input numbers       : from 1 to " + range)
-  println("Number of shifts : " + shifts)
-  for(i <- 1 to range){			// This loop outputs the original sequence before shifting
-    print(i + " ")
-  }
-  println("")
   for(i <- shifts+1 to range)		// this loop outputs the sequense from 'shifts + 1' to the end
     print(i + " ")
   for(i <- 1 to shifts)			// this loop outputh the sequence from 1 to 'shifts'
