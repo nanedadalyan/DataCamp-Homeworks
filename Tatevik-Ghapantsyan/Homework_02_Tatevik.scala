@@ -56,18 +56,40 @@ frequency(arr)
 //---------------------------------4-----------------------------------------------------
 //Task 4 Create function that  will find out how many cases are in array 
 //where sum of numbers is 12. Carefully  test your  function. 
+/*
+I will need to explain the logic behind this one.
+This is recursive function, which calculates sums of all the possible combinations
+and checks if the sum is equal to 12. 
+My function gets 2 parameters
+1. array, for which sums should be calculated 
+2. the variable sum, to which that sum is added
+
+When the function is called, the first element calls the same function with the following arguments
+1. the subarray to the right of the current element (arr.tail)
+2. sum = 0
+
+after this recursion goes on up to the last element, which is our base case.
+Last element adds itself to sum and checks if the new sum is =12. If yes, counter += 1
+When recursion goes up 1 level, the previos element adds itself to sum (which is 0 during first cycle) 
+and checks if the new sum = 12
+after this check, we call the function once more for the arr.tail, but this time we give it the new sum, which includes the 
+value of the current element.
+
+This way we get all the possible combinations and don't miss any case. Sorry for the long comment )
+*/ 
+
 
 var counter = 0
 def sumIs12(arr:Array[Int], sum:Int=0): Int={
   if (arr.length > 1){
-    sumIs12(arr.tail, sum)
-    if(sum + arr.head == 12)
+    sumIs12(arr.tail, sum)		//First function call with the original sum
+    if(sum + arr.head == 12)		//Checking if sum + value of current element is 12
       counter += 1
-    if(sum + arr.head < 12)
-      sumIs12(arr.tail, sum + arr.head)
+    if(sum + arr.head < 12)		//If sum is <12, we call the same function
+      sumIs12(arr.tail, sum + arr.head) //but instead of original sum, send it (sum + value_of_first_element)
     return counter
   }
-  else if(arr.length == 1){
+  else if(arr.length == 1){		//When we reach the end of the array, we stop and go back
     if(sum + arr.head == 12)
       counter += 1
   }
@@ -254,15 +276,15 @@ println(primeRecursive(11, 11/2))     //I also don't like this solution, but wil
 def deleteDublicates(arr:Array[Int]):Array[Int] = {
 	var arrUnique = arr
 	var flag = true
-	for (i <- arr.length-1 to 1 by -1){
+	for (i <- arr.length-1 to 1 by -1){		// We start from the last element and start comparing
 		var j = i-1
 		flag = true
-		while (j>=0 && flag){
+		while (j>=0 && flag){			//Comparison is done here
 			if(arrUnique(i) == arrUnique(j)){
-				arrUnique = arrUnique.patch(i, Nil, 1)
-				flag = false
+				arrUnique = arrUnique.patch(i, Nil, 1) // If we have match, we get rid of our element i
+				flag = false				// Once we have flag=false, our comparison for i stops
 			}
-			j -= 1
+			j -= 1				// In while decrement is done manually
 		}
 	}
 	return arrUnique
@@ -279,6 +301,8 @@ println(deleteDublicates(arr).mkString(", "))
 //---------------------------------12-----------------------------------------------------
 //Task 12 Given two strings, find the number of common 
 //characters between them. 
+
+//This function is quite similar to the previous one, just slightly changed for new conditions
 
 def commonCharacters(str1:String, str2:String):Int = {
 	var count = 0
