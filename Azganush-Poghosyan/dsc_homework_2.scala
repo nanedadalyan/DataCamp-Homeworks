@@ -50,17 +50,19 @@ def funfreq(arr:Array[Int]):Map[Int,Int] = {
 
 
 //4. Create function that will find out how many cases are in array where sum of numbers is 12.
-def sum_n(arr:Array[Int],n:Int):Int = {
+def sum_n(arr:Array[Double],n:Double):Int = {
 //create a recursive function with two arguments: array and an integer (in this case 12)
   var len = arr.length
   var count = 0
   if (n==1) {count = 0}
-  if (len==1 && arr(0)==n) {count=1}
 //base case length is 1 and that one item is int n, discuss cases when n>1
 //if base case is not satisfy, create 2 new arrays, first contains elements that are larger
 //than n and the second contains the rest. 
   else{
-    if (arr.sum<12) {count = 0}
+     if (len==1 && arr(0)==n) {count=1}
+  else{
+    if (arr.sum<n) {count = 0}
+    if (arr.contains(n)==true) {count += 1}
     var arr1 = arr.filter(_>n/2)
     var arr2 = arr.diff(arr1)
 //sum of elements should be at least equal to n, if not, count is 0
@@ -69,16 +71,15 @@ def sum_n(arr:Array[Int],n:Int):Int = {
 //if yes add 1 to variable count. Both if it contains n-i and not call the same function
 //on the rest of the array this time with integer value of n-i, because we are interested
 //in all combinations, not only doubles
-    for (i <- arr1.distinct) {
-      if (i==n){count+=1}
+   for (i <- arr1.distinct) {
       if (arr2.contains(n-i)==true) {count +=1}
        count += sum_n(arr2, n-i)    
     }
 }
-  
+  }
   return (count)
 }
-//ps. has some bugs, counts extra elements.
+//ps. has some bugs.
 sum_n(Array(),12)
 
 //5. Sort array in ascending order using different sorting methods (choose 2
