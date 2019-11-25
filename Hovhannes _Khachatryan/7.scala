@@ -1,0 +1,22 @@
+
+
+
+def list3(lst:List[Int]):List[Int] = lst.slice(0,3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
