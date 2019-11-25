@@ -60,11 +60,10 @@ def sum_n(arr:Array[Int],n:Int):Int = {
 //if base case is not satisfy, create 2 new arrays, first contains elements that are larger
 //than n and the second contains the rest. 
   else{
+    if (arr.sum<12) {count = 0}
     var arr1 = arr.filter(_>n/2)
     var arr2 = arr.diff(arr1)
-    n != 1
 //sum of elements should be at least equal to n, if not, count is 0
-    if (arr.sum<12) {count = 0}
     if (arr.diff(arr.distinct).contains(n/2)==true) {count +=1}    
 //for each element in first array, check if the second array contains the element n-i. 
 //if yes add 1 to variable count. Both if it contains n-i and not call the same function
