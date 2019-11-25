@@ -79,7 +79,7 @@ def sum_n(arr:Array[Double],n:Double):Int = {
   }
   return (count)
 }
-//ps. has some bugs.
+//ps. has some small bugs.
 sum_n(Array(),12)
 
 //5. Sort array in ascending order using different sorting methods (choose 2
