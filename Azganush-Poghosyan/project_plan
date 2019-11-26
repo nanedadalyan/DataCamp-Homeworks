@@ -1,0 +1,56 @@
+Project:  Sharing Journey
+Plan
+
+1) Create an environment (country) that will have locations(cities, towns), drivers and passengers.
+2) Locations will be defined initially in a list and cannot be changed. Maybe they can be added at some point in the time as new 
+   destinations.
+3) Drivers and Passengers are types of users, each one will be a separate class.
+4) The environment will have a list of drivers and passengers that will be updated every time a new user is added through (addDriver
+   or addPassenger method. It will also have deleteDriver and deletePassenger methods to implement after a driver is fully booked and 
+   the passenger found a driver.
+5) Every Driver will have the following parameters:
+   Name 
+   Starting_Point    //where journey will start 
+   Mid_Destination_1 
+   Mid_Destination_2 //mid destinations are some locations between starting and final destinations, so it is not mandatory 
+                      for a passenger to go till the final destination with the driver, it can go to some midpoint 
+   Final_Destination 
+   Date
+   Time 
+   Number_of_Seats 
+   Price_per_Seat
+   Car_Model         //this will be as one option for choosing a driver in case there are several drivers satisfying a 
+                        passenger's searching criterias
+   Status [Free, Partially_Booked, Booked]
+6) Every Passenger will have the following parameters:
+   Name
+   Starting_Point
+   Final_Destination
+   Date
+   Time_Range   //A Passenger will add time range, because maybe time is not so important for him/her; in that case the system
+                  will filter the drivers not strictly by time, but by time range. In case time is an important criteria, the 
+                  starting and ending point of time range will be the same, to search by exact time.
+   Car_Model_Preference (3 different car model, chooosing from the list)  //optional, this maybe changed
+   Status [Searching, Found]
+   Price_Range  //optional
+   
+   //the parameters Car_Model_Prefefrence and Price_Range should be optional. In case there are several drivers satisfying the
+     criterias of passenger's search, it will choose first by lower price, and second by car preference. If there is only one driver
+     satisfying all other conditions of the search, then the drivers should not be filtered by these two parameters, otherwise maybe
+     a passenger will never find a driver.
+ 7) Functions: 
+    Drivers can have functions 1)to update status, and 2)to accept payment from a Passenger
+    Passengers can have functions 1)to search for drivers [filter from driver list], 2)to pay for the journey 4)to update status
+ 8) Every time a new Driver is created it will be added to the list of drivers. When a new Passenger is created it can search among 
+    existing drivers by all mandatory criterias (Starting_Point(=starting point of Drivers), Final_Destination(=final or mid 
+    destinations of Drivers), Date (=Date of Drivers), Time_Range (includes Time of Drivers), Status(Status of the driver, should 
+    be free or partially booked) and optional criterias (Price_Range (should include Price_per_Seat of Drivers) and Car_Model_Preference
+    (should include the Car_Model of drivers). If there is a driver satisfying all the criterias, a Passenger can pay for the journey
+    and the Driver can accept the payment. This step is for making sure that the deal took place after which a Passenger can change
+    the status from Searching to Found and the Driver can change the status from Free to Partially_Booked or Booked.
+    When a Passenger's status is Found, the environment can delete such a passenger, and in the same way a Driver with a Booked status.
+    If during a Passenger's search there was not found any Driver, the Passenger can remain in the Passengers' list and every time a 
+    new Driver is added the search can be done again.
+    
+    Some counters can be created in the environment to accumulate statistics about parameters (popular destinations, number of 
+    Passengers in a month, etc.)
