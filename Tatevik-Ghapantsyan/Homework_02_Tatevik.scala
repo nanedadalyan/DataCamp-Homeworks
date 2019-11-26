@@ -17,14 +17,10 @@ println(factorial(3))
 //Calculate sum of n numbers using recursion. What  is the running time? 
 
 def sum(num:Integer):Integer={
-  var result = 0
-  if (num > 1){
-    result = num + sum(num-1)
-  }
-  else{
-    return 1;
-  }
-  return result;
+  if (num > 1)
+    return num + sum(num-1)
+  else
+    return 0
 }
 
 println(sum(7))
