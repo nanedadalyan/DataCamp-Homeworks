@@ -112,12 +112,9 @@ counter = 0
 // Mergesort --------------------------------------------------------
 def mergeSort(arr:Array[Int]):Array[Int]={  // This function divides array into 2 parts
   var len = arr.length
-  if (len > 1){
-    var a = len/2
-    return merge(mergeSort(arr.slice(0, a)), mergeSort(arr.slice(a, len+1)))
-  }
-  else
-    return arr
+  if (len > 1)
+    return merge(mergeSort(arr.slice(0, len/2)), mergeSort(arr.slice(len/2, len+1)))
+  else return arr
 }
 
 def merge(arr1:Array[Int], arr2:Array[Int]):Array[Int]={  // This function merges arrays
@@ -127,23 +124,14 @@ def merge(arr1:Array[Int], arr2:Array[Int]):Array[Int]={  // This function merge
   var len2 = arr2.length
   var arrMerged:Array[Int] = new Array[Int](len1+len2)
   for (i <- 0 to (len1+len2)-1){
-    if (i1==len1){    //if we have used all the members of the first array
-      arrMerged(i1+i2) = arr2(i2)
-      i2 += 1
-    }
-    else if (i2 == len2){    //if we have used all the members of the second array
-      arrMerged(i1+i2) = arr1(i1)
-      i1 += 1
-    }
-    else if (arr1(i1) <= arr2(i2)){
-      arrMerged(i1+i2) = arr1(i1)
-      i1 += 1
-    }
-    else {
-      arrMerged(i1+i2) = arr2(i2)
-      i2 += 1
-    }
-    
+    if (i1==len1)   				//if we have used all the members of the first array
+	{arrMerged(i1+i2) = arr2(i2);  i2 += 1}
+    else if (i2 == len2)    			//if we have used all the members of the second array
+	{arrMerged(i1+i2) = arr1(i1);  i1 += 1}
+    else if (arr1(i1) <= arr2(i2))
+	{arrMerged(i1+i2) = arr1(i1);  i1 += 1}
+    else 
+	{arrMerged(i1+i2) = arr2(i2);  i2 += 1}
   }
   return arrMerged
 }
@@ -169,7 +157,6 @@ def quicksort(arr: Array[Int]):Array[Int]={
         array(i)=temp
         j += 1
       }
-      //println(arr.mkString(", "))
    }
     temp = array(len-1)
     array(len-1)=array(j)
@@ -193,11 +180,9 @@ println(quicksort(Array(-1, 1000000, 100000000, 7, 99, 7777, 3000+9000+300+1100+
 
 def stringEvenLength(arr:Array[String]): Array[Int]={
   var arrEven = Array[Int]()
-  var j = 0
-  for (i <- arr){
-    if (i.length % 2 == 0)
-      arrEven = arrEven :+ j
-    j += 1
+  for (i <- 0 until arr.length){
+    if (arr(i).length % 2 == 0)
+      arrEven = arrEven :+ i
   }
   return arrEven
 }
@@ -211,19 +196,18 @@ println(stringEvenLength(arr).mkString(", "))
 //---------------------------------7-----------------------------------------------------
 //Task 7 Create function that will return the first 3 items in a list.
 
-	import scala.math.min
-	def threeItems(lst:List[Any]): Unit ={
-		var listThree = List[Any]()
-		for(i <- min(2, lst.length-1) to 0 by -1){
-		    listThree =  lst(i) :: listThree
-		}
+import scala.math.min
+def threeItems(lst:List[Any]): Unit ={
+  var listThree = List[Any]()
+  for(i <- min(2, lst.length-1) to 0 by -1){
+    listThree =  lst(i) :: listThree
+  }
+  println("The result is " + listThree.mkString(", "))
+}
 
-		println("The result is " + listThree.mkString(", "))
-	}
 
-
-	var lst=List(1, 2, 'a', "hello")
-	threeItems(lst)
+var lst=List(1, 2, 'a', "hello")
+threeItems(lst)
 //---------------------------------7 END -------------------------------------------------
 
 
@@ -270,24 +254,23 @@ println(primeRecursive(11, 11/2))     //I also don't like this solution, but wil
 //elements from the array.
 
 def deleteDublicates(arr:Array[Int]):Array[Int] = {
-	var arrUnique = arr
-	var flag = true
-	for (i <- arr.length-1 to 1 by -1){		// We start from the last element and start comparing
-		var j = i-1
-		flag = true
-		while (j>=0 && flag){			//Comparison is done here
-			if(arrUnique(i) == arrUnique(j)){
-				arrUnique = arrUnique.patch(i, Nil, 1) // If we have match, we get rid of our element i
-				flag = false				// Once we have flag=false, our comparison for i stops
-			}
-			j -= 1				// In while decrement is done manually
-		}
-	}
-	return arrUnique
+  var arrUnique = arr
+  var flag = true
+  for (i <- arr.length-1 to 1 by -1){		// We start from the last element and start comparing
+    var j = i-1
+    flag = true
+    while (j>=0 && flag){			//Comparison is done here. we compare 'i' element to the rest
+      if(arrUnique(i) == arrUnique(j)){
+        arrUnique = arrUnique.patch(i, Nil, 1) 	// If we have match, we get rid of our element i
+        flag = false				// Once we have flag=false, our comparison for i stops
+      }
+      j -= 1					// In while decrement is done manually
+    }
+  }
+  return arrUnique
 }
 
-arr = Array(1, 1, 3, 4, 1, 4, 1, 9)
-println(deleteDublicates(arr).mkString(", "))
+println(deleteDublicates(Array(1, 1, 3, 4, 1, 4, 1, 9)).mkString(", "))
 
 //---------------------------------11 END -------------------------------------------------
 
@@ -301,22 +284,22 @@ println(deleteDublicates(arr).mkString(", "))
 //This function is quite similar to the previous one, just slightly changed for new conditions
 
 def commonCharacters(str1:String, str2:String):Int = {
-	var count = 0
-	var str2new = str2
-	var flag = true
-	for (i <- str1){
-		flag = true
-		var j = 0
-		while ( j < str2new.length && flag){
-			if(i == str2new(j)){
-				str2new = str2new.patch(j, Nil, 1)
-				flag = false
-				count += 1
-			}
-			j += 1
-		}
-	}
-	return count
+  var count = 0
+  var str2new = str2
+  var flag = true
+  for (i <- str1){
+    flag = true
+    var j = 0
+    while ( j < str2new.length && flag){
+      if(i == str2new(j)){
+        str2new = str2new.patch(j, Nil, 1)
+        flag = false
+        count += 1
+      }
+      j += 1
+    }
+  }
+  return count
 }
 
 val str1 = "aannaassn"
