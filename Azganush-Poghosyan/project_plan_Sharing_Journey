@@ -1,7 +1,7 @@
 Project:  Sharing Journey
 Plan
 
-1) Create an environment (country) that will have locations(cities, towns), drivers and passengers.
+1) Create an environment (country) that will have cities, drivers and passengers.
 2) Locations will be defined initially in a list and cannot be changed. Maybe they can be added at some point in the time as new 
    destinations.
 3) Drivers and Passengers are types of users, each one will be a separate class.
@@ -48,7 +48,6 @@ Plan
     (should include the Car_Model of drivers). If there is a driver satisfying all the criterias, a Passenger can pay for the journey
     and the Driver can accept the payment. This step is for making sure that the deal took place after which a Passenger can change
     the status from Searching to Found and the Driver can change the status from Free to Partially_Booked or Booked.
-    When a Passenger's status is Found, the environment can delete such a passenger, and in the same way a Driver with a Booked status.
     If during a Passenger's search there was not found any Driver, the Passenger can remain in the Passengers' list and every time a 
     new Driver is added the search can be done again.
     
