@@ -11,8 +11,7 @@ Plan
 5) Every Driver will have the following parameters:
    Name 
    Starting_Point    //where journey will start 
-   Mid_Destination_1 
-   Mid_Destination_2 //mid destinations are some locations between starting and final destinations, so it is not mandatory 
+   Mid_Destination_1 //mid destination is a location between starting and final destinations, so it is not mandatory 
                       for a passenger to go till the final destination with the driver, it can go to some midpoint 
    Final_Destination 
    Date
@@ -39,8 +38,8 @@ Plan
      satisfying all other conditions of the search, then the drivers should not be filtered by these two parameters, otherwise maybe
      a passenger will never find a driver.
  7) Functions: 
-    Drivers can have functions 1)to update status, and 2)to accept payment from a Passenger 
-    Passengers can have functions 1)to search for drivers [filter from driver list], 2)to pay for the journey 4)to update status
+    Drivers can have functions 1)to update status, and 2)to accept payment from a Passenger*** 
+    Passengers can have functions 1)to search for drivers*** [filter from driver list], 2)to pay for the journey*** 4)to update status
     !!!the functions of drivers and passengers need to be discussed, how possible are they for implementation
  8) Every time a new Driver is created it will be added to the list of drivers. When a new Passenger is created it can search among 
     existing drivers by all mandatory criterias (Starting_Point(=starting point of Drivers), Final_Destination(=final or mid 
