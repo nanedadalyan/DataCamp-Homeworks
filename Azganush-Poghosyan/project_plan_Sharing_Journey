@@ -10,7 +10,7 @@ Plan
    the passenger found a driver.
 5) Every Driver will have the following parameters:
    Name 
-   Starting_Point    //where journey will start 
+   Starting_Point    //where the journey starts
    Mid_Destination_1 //mid destination is a location between starting and final destinations, so it is not mandatory 
                       for a passenger to go till the final destination with the driver, it can go to some midpoint 
    Final_Destination 
