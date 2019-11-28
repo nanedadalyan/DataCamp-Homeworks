@@ -1,0 +1,39 @@
+Tamagotchi – Virtual Pet
+
+The application will have 3 objects
+1.	Player
+2.	Pet
+3.	Menu
+
+Player has
+1.	Name
+2.	Id
+3.	Pets
+
+Pets have the following properties
+1.	Hunger meter
+2.	Happy meter
+3.	Health meter
+4.	Life cycle (Baby, Child, Teen, Adult, Senior)
+5.	Age
+6.	Type of pet
+7.	Gender
+8.	Name
+
+Menu has the following methods
+1.	Create a player
+2.	Create a pet 
+3.	Open saved instance
+4.	Food
+5.	Games
+6.	Medicine
+7.	Clean up
+8.	Pause/Resume
+9.	Exit the app
+
+The following methods should be used to take care of a pet
+1.	To decrease hunger meter, we need to feed the pet
+2.	To increase happiness, we need to play with the pet
+3.	We need to clean the room, to keep our pet healthy and if it gets sick, we need to give it a medicine
+4.	Pets can have babies during adult life cycle. If they have babies, after some time they leave, and the offspring stays with player
+5.	Pets die of old age
