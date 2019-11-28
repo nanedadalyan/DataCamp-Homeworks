@@ -24,5 +24,6 @@ object Main extends App {
   todoList.getTasksByDate(DateTime.parse("11/28/2019", DateTimeFormat.forPattern("MM/dd/yyyy")))
   println("Next week's tasks are  "+ (todoList.getNextWeekTasks).mkString(" "))
   todoList.percentDone()
+  
 }
 
