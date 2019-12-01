@@ -2,12 +2,9 @@ Project:  Sharing Journey
 Plan
 
 1) Create an environment (country) that will have cities, drivers and passengers.
-2) Locations will be defined initially in a list and cannot be changed. Maybe they can be added at some point in the time as new 
-   destinations.
+2) Locations will be defined initially in an Enumeration Object. 
 3) Drivers and Passengers are types of users, each one will be a separate class.
-4) The environment will have a list of drivers and passengers that will be updated every time a new user is added through (addDriver
-   or addPassenger method. It will also have deleteDriver and deletePassenger methods to implement after a driver is fully booked and 
-   the passenger found a driver.
+4) The environment will have methods to add new drivers and passengers to their corresponding lists.
 5) Every Driver will have the following parameters:
    Name 
    Starting_Point    //where the journey starts
@@ -18,9 +15,7 @@ Plan
    Time 
    Number_of_Seats 
    Price_per_Seat
-   Car_Model         //this will be as one option for choosing a driver in case there are several drivers satisfying a 
-                        passenger's searching criterias
-   Status [Free, Partially_Booked, Booked]
+   Status [Free, Booked]
 6) Every Passenger will have the following parameters:
    Name
    Starting_Point
@@ -29,27 +24,25 @@ Plan
    Time_Range   //A Passenger will add time range, because maybe time is not so important for him/her; in that case the system
                   will filter the drivers not strictly by time, but by time range. In case time is an important criteria, the 
                   starting and ending point of time range will be the same, to search by exact time.
-   Car_Model_Preference (3 different car model, chooosing from the list)  //optional, this maybe changed
    Status [Searching, Found]
-   Price_Range  //optional
+   Max_price (the maximum price that a customer is ready to pay for the journey
    
-   //the parameters Car_Model_Prefefrence and Price_Range should be optional. In case there are several drivers satisfying the
-     criterias of passenger's search, it will choose first by lower price, and second by car preference. If there is only one driver
-     satisfying all other conditions of the search, then the drivers should not be filtered by these two parameters, otherwise maybe
-     a passenger will never find a driver.
  7) Functions: 
-    Drivers can have functions 1)to update status, and 2)to accept payment from a Passenger*** 
-    Passengers can have functions 1)to search for drivers*** [filter from driver list], 2)to pay for the journey*** 4)to update status
-    !!!the functions of drivers and passengers need to be discussed, how possible are they for implementation
+    Through a special Payment environment the Passengers can pay for the journey and and Drivers can accept the payment.
+    When a Passenger pays for the journey its payment status changes to "Paid", the Drivers account gets filled with its 
+    price-per-seat amount and the driver's payment status changes to "Received". Then the driver accepts the payment, and both 
+    the driver's and the passenger's payment status changes to "Accepted", at the same time the driver's account is nullified.
+    This means the deal was made after which  1)the passenger's status changes to booked, 2)driver's number of seats becomes 1 seat less,
+    3)if that was the driver's last seat, its status changes to booked.
+    Separately, passengers can have function find_driver which finds only those drivers that satisfy their criteria. If there are
+    many drivers, it will choose the one with the lowest price.
  8) Every time a new Driver is created it will be added to the list of drivers. When a new Passenger is created it can search among 
     existing drivers by all mandatory criterias (Starting_Point(=starting point of Drivers), Final_Destination(=final or mid 
-    destinations of Drivers), Date (=Date of Drivers), Time_Range (includes Time of Drivers), Status(Status of the driver, should 
-    be free or partially booked) and optional criterias (Price_Range (should include Price_per_Seat of Drivers) and Car_Model_Preference
-    (should include the Car_Model of drivers). If there is a driver satisfying all the criterias, a Passenger can pay for the journey
-    and the Driver can accept the payment. This step is for making sure that the deal took place after which a Passenger can change
-    the status from Searching to Found and the Driver can change the status from Free to Partially_Booked or Booked.
-    If during a Passenger's search there was not found any Driver, the Passenger can remain in the Passengers' list and every time a 
-    new Driver is added the search can be done again.
+    destination of Drivers), Date (=Date of Drivers), Time_Range (includes Time of Drivers), Status(Status of the driver, should 
+    be free) and Number_of_Seats should be at least one. If there is a driver satisfying all the criterias, a Passenger can pay for 
+    the journey and the Driver can accept the payment. This step is for making sure that the deal took place after which a Passenger's 
+    status changes from Searching to Found and the Driver's status can be changed from Free to Booked, depending on the number of seats.
+    If during a Passenger's search there was not found any Driver, the Passenger can remain in the Passengers' list and try the search
+    later on. 
     
-    Some counters can be created in the environment to accumulate statistics about parameters (popular destinations, number of 
-    Passengers in a month, etc.)
+    
