@@ -1,0 +1,8 @@
+Main class of the package is expense class which is abstract class.
+It has 2 methods: setData which loads  info into a CSV file and getData which loads info from the CSV files.
+Two classes - Shoping and EatingOut inherit from the expense class.
+TrInfo is a case class which contains attributes of the transactions (i.e. id, date, amount, description)
+and is used in Shoping and EatingOut classes.
+We also have Places abstract  class (with inheriting shopingPlaces and EatingPlaces)
+which provides user opportunity to rate and comment a visited place and provides average rate and history of
+comments of each place (shopping place, eatingOut place etc.) .
